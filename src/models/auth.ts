@@ -1,18 +1,18 @@
-import { writeFileSync, readFileSync } from "jsonfile";
+import { writeFile, readFile } from "jsonfile";
 
 class AuthModel {
-  static write(data) {
+  static async write(data) {
     try {
-      writeFileSync("../database/auth.json", data);
+      await writeFile("../database/auth.json", data);
       return true;
     } catch (error) {
       throw error;
     }
   }
 
-  static read() {
+  static async read() {
     try {
-      const db = readFileSync("../database/auth.json");
+      const db = await readFile("../database/auth.json");
       return db;
     } catch (error) {
       throw error;

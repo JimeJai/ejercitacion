@@ -2,29 +2,33 @@ import { NextFunction, Request, Response } from "express";
 import ProductsService from "../services/products";
 
 class ProductsController {
-  static getAllProducts(req: Request, res: Response, next: NextFunction) {
-    try { ProductsService.getAllProducts()
+  static async getAllProducts(req: Request, res: Response, next: NextFunction) {
+    try {
+      await ProductsService.getAllProducts();
     } catch (error) {
       next(error);
     }
   }
 
-  static create (req: Request, res: Response, next: NextFunction) {
-    try { ProductsService.create(req.body)
+  static async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      await ProductsService.create(req.body);
     } catch (error) {
       next(error);
     }
   }
 
-  static update (req: Request, res: Response, next: NextFunction) {
-    try { ProductsService.update(req.params.id, req.body)
+  static async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      await ProductsService.update(req.params.id, req.body);
     } catch (error) {
       next(error);
     }
   }
 
-  static deleteProduct (req: Request, res: Response, next: NextFunction) {
-    try { ProductsService.deleteProduct(req.params.id)
+  static async deleteProduct(req: Request, res: Response, next: NextFunction) {
+    try {
+      await ProductsService.deleteProduct(req.params.id);
     } catch (error) {
       next(error);
     }

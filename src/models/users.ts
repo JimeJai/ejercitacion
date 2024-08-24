@@ -1,18 +1,18 @@
-import { writeFileSync, readFileSync } from "jsonfile";
+import { writeFile, readFile } from "jsonfile";
 
 class UsersModel {
-  static write(data) {
+  static async write(data) {
     try {
-      writeFileSync("../database/users.json", data);
+      await writeFile("../database/users.json", data);
       return true;
     } catch (error) {
       throw error;
     }
   }
 
-  static read() {
+  static async read() {
     try {
-      const db = readFileSync("../database/users.json");
+      const db = await readFile("../database/users.json");
       return db;
     } catch (error) {
       throw error;

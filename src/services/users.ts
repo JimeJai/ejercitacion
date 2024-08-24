@@ -2,21 +2,21 @@ import UsersModel from "../models/users";
 import { v4 as uuidv4 } from "uuid";
 
 class UsersService {
-  static create(data: { name: string; email: string }) {
+  static async create(data: { name: string; email: string }) {
     try {
-      const usersDb = UsersModel.read();
+      const usersDb = await UsersModel.read();
       const id = uuidv4();
       usersDb.users.push({ name: data.name, email: data.email, id: id });
-      UsersModel.write(usersDb);
+      UsersModel.write(usersDb); // chequear si await o no
       return id;
     } catch (error) {
       throw error;
     }
   }
 
-  static read() {
+  static async read() {
     try {
-      const db = UsersModel.read();
+      const db = await UsersModel.read();
       return db;
     } catch (error) {
       throw error;

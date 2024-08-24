@@ -1,29 +1,33 @@
-import ProductsModel from "../models/products"
+import ProductsModel from "../models/products";
 
 class ProductsService {
-  static getAllProducts() {
-    try { ProductsModel.read()
+  static async getAllProducts() {
+    try {
+      await ProductsModel.read();
     } catch (error) {
       throw error;
     }
   }
 
-  static create (product) {
-    try { ProductsModel.write("parámetro")
+  static async create(product) {
+    try {
+      await ProductsModel.write("parámetro");
     } catch (error) {
       throw error;
     }
   }
 
-  static update (id, data) {
-    try { ProductsModel.write("parámetro")
+  static async update(id, data) {
+    try {
+      await ProductsModel.write("parámetro");
     } catch (error) {
       throw error;
     }
   }
 
-  static deleteProduct (id) {
-    try { ProductsModel.write("parámetro")
+  static async deleteProduct(id) {
+    try {
+      await ProductsModel.write("parámetro");
     } catch (error) {
       throw error;
     }

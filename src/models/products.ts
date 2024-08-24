@@ -1,18 +1,18 @@
-import { writeFileSync, readFileSync } from "jsonfile";
+import { writeFile, readFile } from "jsonfile";
 
 class ProductsModel {
-  static write(data) {
+  static async write(data) {
     try {
-      writeFileSync("../database/products.json", data);
+      await writeFile("../database/products.json", data);
       return true;
     } catch (error) {
       throw error;
     }
   }
 
-  static read() {
+  static async read() {
     try {
-      const db = readFileSync("../database/products.json");
+      const db = await readFile("../database/products.json");
       return db;
     } catch (error) {
       throw error;
