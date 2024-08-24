@@ -30,10 +30,29 @@ class AuthService {
     }
   }
 
-  static async login(req: Request, res: Response, next: NextFunction) {
+  static async login(data: { email; password }) {
     try {
+      const user = await UsersService.getByEmail(data.email);
+      const userAuth = await AuthService.getByUserId(user.id);
+
+      if (userAuth.password != createHash(data.password)) {
+        throw new Error("Usuario no encontrado");
+      }
+      return userAuth.token;
     } catch (error) {
-      next(error);
+      throw error;
+    }
+  }
+  static async getByUserId(userId) {
+    try {
+      const db = await AuthModel.read();
+      const user = db.auth.find((user) => user.userId == userId);
+      if (!user) {
+        throw new Error("Usuario no encontrado");
+      }
+      return user;
+    } catch (error) {
+      throw error;
     }
   }
 }
