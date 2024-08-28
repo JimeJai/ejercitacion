@@ -1,11 +1,13 @@
 import { Router } from "express";
-import authRouter from "./auth"
+
+import authRouter from "./auth";
 import productsRouter from "./products";
 
-const indexRouter = Router()
+import checkToken from "../middlewares/check-token";
 
-indexRouter.use("/auth", authRouter)
-indexRouter.use("/products", productsRouter)
+const indexRouter = Router();
 
+indexRouter.use("/auth", authRouter);
+indexRouter.use("/products", checkToken, productsRouter);
 
-export default indexRouter
+export default indexRouter;

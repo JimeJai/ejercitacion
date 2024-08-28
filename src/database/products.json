@@ -1,5 +1,28 @@
 {
-    "products":[
-        
-    ]
+  "products": [
+    {
+      "id": "1",
+      "description": "producto 1",
+      "sellPrice": 200,
+      "stock": 21
+    },
+    {
+      "id": "2",
+      "description": "producto tornillo",
+      "sellPrice": 200,
+      "stock": 20
+    },
+    {
+      "id": "3",
+      "description": "tornillo",
+      "sellPrice": 200,
+      "stock": 20
+    },
+    {
+      "id": "4",
+      "description": "tor",
+      "sellPrice": 200,
+      "stock": 20
+    }
+  ]
 }

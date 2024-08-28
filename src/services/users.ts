@@ -8,6 +8,7 @@ class UsersService {
       const usersDb = await UsersModel.read();
       const id = uuidv4();
       usersDb.users.push({ name: data.name, email: data.email, id: id });
+
       UsersModel.write(usersDb); // chequear si await o no
       return id;
     } catch (error) {
@@ -18,6 +19,7 @@ class UsersService {
   static async read() {
     try {
       const db = await UsersModel.read();
+
       return db;
     } catch (error) {
       throw error;
@@ -30,7 +32,10 @@ class UsersService {
 
       const user = db.users.find((user) => email == user.email);
       if (!user) {
-        throw new Error("Usuario no encontrado");
+        const error = new Error("Usuario no encontrado");
+        error["statusCode"] = 404
+
+        throw error
       }
       return user;
     } catch (error) {

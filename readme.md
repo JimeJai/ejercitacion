@@ -55,9 +55,9 @@ Pueden armar la estructura de carpetas del proyecto de esta forma:
 **products.json** es una collection cuyos objetos tienen la forma:
 
 `{`
-`"id": "ac838afb-d8bb-4a40-8984-761152735c77",`
-`"description": "un producto buenísimo",`
-`"sellPrice": "50000",`
+    `"id": "ac838afb-d8bb-4a40-8984-761152735c77",`
+    `"description": "un producto buenísimo",`
+    `"sellPrice": "50000",`
 `}`
 
 **users.json** es también una collection, sus objetos son así:
@@ -66,7 +66,6 @@ Pueden armar la estructura de carpetas del proyecto de esta forma:
 `"id": "312323-d2bb-5d20-8984-122352735c77",`
 `"username": "Juanito",`
 `"email": "juan@ito.com",`
-`"token": "3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2",`
 `}`
 
 **auth.json** es también una collection, sus objetos son así:
@@ -75,6 +74,7 @@ Pueden armar la estructura de carpetas del proyecto de esta forma:
 `"id": "ac848afv-d2bb-5d20-8984-122352735c77",`
 `"userId": "312323-d2bb-5d20-8984-122352735c77",`
 `"password": "3c9909afee38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2",`
+`"token": "3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2",`
 `}`
 
 <h1 align="center">PASOS para arrancar el proyecto</h1>

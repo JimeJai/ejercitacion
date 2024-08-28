@@ -23,6 +23,7 @@ class AuthService {
         password: createHash(data.password),
         token: token,
       });
+
       AuthModel.write(authDb);
       return token;
     } catch (error) {
@@ -36,19 +37,27 @@ class AuthService {
       const userAuth = await AuthService.getByUserId(user.id);
 
       if (userAuth.password != createHash(data.password)) {
-        throw new Error("Usuario no encontrado");
+        const error = new Error("Contraseña incorrecta");
+        error["statusCode"] = 400
+
+        throw error
       }
+
       return userAuth.token;
     } catch (error) {
       throw error;
     }
   }
+
   static async getByUserId(userId) {
     try {
       const db = await AuthModel.read();
       const user = db.auth.find((user) => user.userId == userId);
       if (!user) {
-        throw new Error("Usuario no encontrado");
+        const error = new Error("Usuario no encontrado");
+        error["statusCode"] = 404
+
+        throw error
       }
       return user;
     } catch (error) {
