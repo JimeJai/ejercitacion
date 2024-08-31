@@ -34,7 +34,8 @@ class AuthService {
   static async login(data: { email; password }) {
     try {
       const user = await UsersService.getByEmail(data.email);
-      const userAuth = await AuthService.getByUserId(user.id);
+      const authDb = await AuthModel.read()
+      const userAuth = authDb.auth.find((auth) => auth.userId == user.id)
 
       if (userAuth.password != createHash(data.password)) {
         const error = new Error("Contraseña incorrecta");
@@ -43,7 +44,32 @@ class AuthService {
         throw error
       }
 
+      const token = createHash(uuidv4());
+      userAuth.token = token
+
+      await AuthModel.write(authDb)
+
       return userAuth.token;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async logout(token) {
+    try {
+      const authDb = await AuthModel.read()
+      const auth = authDb.auth.find((auth) => auth.token == token)
+
+      if (!auth) {
+        const error = new Error("token no encontrado");
+        error["statusCode"] = 404
+
+        throw error
+      }
+
+      auth.token = null
+
+      await AuthModel.write(authDb)      
     } catch (error) {
       throw error;
     }

@@ -1,3 +1,9 @@
 {
-    "users": []
+  "users": [
+    {
+      "name": "string",
+      "email": "string",
+      "id": "eec7c571-8554-4027-bfa0-4510ca6943e6"
+    }
+  ]
 }
