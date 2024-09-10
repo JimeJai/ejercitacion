@@ -1,14 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
 import ProductsModel from "../models/products";
+import { validateProduct } from "../schemas/product-schema";
 
 class ProductsService {
   static async getAll(where) {
     try {
       const { products } = await ProductsModel.read();
 
-      const productsFiltered = products.filter((product)=> product.description.includes(where.description) && product.stock > where.stock)
+      const productsFiltered = products.filter(
+        (product) =>
+          product.description.includes(where.description) &&
+          product.stock > where.stock
+      );
 
-      return productsFiltered 
+      return productsFiltered;
     } catch (error) {
       throw error;
     }
@@ -16,6 +21,10 @@ class ProductsService {
 
   static async create(product: { description: string; sellPrice: number }) {
     try {
+      const result = validateProduct(product);
+
+      if (!result.success) throw new Error(JSON.stringify(result.error.issues));
+
       const db = await ProductsModel.read();
 
       const id = uuidv4();
@@ -26,6 +35,7 @@ class ProductsService {
         description: description,
         sellPrice: sellPrice,
       };
+
       db.products.push(newProduct);
 
       await ProductsModel.write(db);
@@ -44,8 +54,9 @@ class ProductsService {
       const db = await ProductsModel.read();
 
       let products = db.products.map((product) => {
-        if(product.id == id){ return {...product,...data}}
-        else return product
+        if (product.id == id) {
+          return { ...product, ...data };
+        } else return product;
       });
 
       // if (!product) {
@@ -55,7 +66,7 @@ class ProductsService {
       //   throw error;
       // }
 
-      db.products = products
+      db.products = products;
 
       await ProductsModel.write(db);
     } catch (error) {
