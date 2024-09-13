@@ -51,6 +51,8 @@ class ProductsService {
     data: { description: string; sellPrice: number }
   ) {
     try {
+      const result = validateProduct(data);
+      if (!result.success) throw new Error("Datos invalidos");
       const db = await ProductsModel.read();
 
       let products = db.products.map((product) => {

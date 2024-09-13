@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import AuthModel from "../models/auth";
 import createHash from "../utils/create-hash";
 import { validateRegister } from "../schemas/register-schema";
+import { validateLogin } from "../schemas/login-schema";
 
 class AuthService {
   static async register(data: {
@@ -39,6 +40,9 @@ class AuthService {
 
   static async login(data: { email; password }) {
     try {
+      const result = validateLogin(data);
+      if (!result.success) throw new Error("Datos incorrectos");
+
       const user = await UsersService.getByEmail(data.email);
       const authDb = await AuthModel.read();
       const userAuth = authDb.auth.find((auth) => auth.userId == user.id);

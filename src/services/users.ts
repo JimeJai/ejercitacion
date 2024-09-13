@@ -33,9 +33,9 @@ class UsersService {
       const user = db.users.find((user) => email == user.email);
       if (!user) {
         const error = new Error("Usuario no encontrado");
-        error["statusCode"] = 404
+        error["statusCode"] = 404;
 
-        throw error
+        throw error;
       }
       return user;
     } catch (error) {
